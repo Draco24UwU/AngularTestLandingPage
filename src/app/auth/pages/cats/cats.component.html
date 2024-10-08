@@ -1,0 +1,43 @@
+<div class="w-full">
+  <div
+    class="flex flex-col gap-y-12 items-center text-center justify-center lg:w-[850px] mx-auto"
+  >
+    <h5>Cats</h5>
+    <h1>
+      Try
+      <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-[#E8681E] to-[#933213] bg-animation"
+        >The Cat API!</span
+      >
+      xd
+    </h1>
+  </div>
+
+  <div class="w-3/4 mx-auto space-y-10 pt-12">
+    <img
+      class="md:w-96 md:h-96 h-60 w-60 mx-auto rounded-xl border border-green-800"
+      [src]="cat.url"
+      [alt]="cat.id"
+    />
+    <div class="w-full flex items-center justify-center gap-12">
+      <app-button
+        className=" bg-blue-500 hover:bg-blue-500 hover:scale-105 active:font-extrabold"
+        (btnClick)="generateNewCat()"
+        label="Generate Random Cat!"
+      />
+      <app-button
+        className=" bg-blue-500 hover:bg-blue-500 hover:scale-105 active:font-extrabold"
+        (btnClick)="generateNewCats()"
+        label="Generate Random Cats!"
+      />
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center justify-center gap-12 pt-12">
+    <img
+      class="md:w-96 md:h-96 h-60 w-60 rounded-xl border border-[#E8681E]"
+      *ngFor="let cat of cats"
+      [src]="cat.url"
+      [alt]="cat.id"
+    />
+  </div>
+</div>

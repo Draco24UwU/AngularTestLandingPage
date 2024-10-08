@@ -1,0 +1,117 @@
+<nav class="navBar relative">
+  <div class="navBarContainer">
+    <div
+      class="navBarLogo"
+      [ngClass]="{
+        'border-x  border-[#EF6515] rounded-lg': currentRoute === '/'
+      }"
+      (click)="handleMobileLinks()"
+    >
+      <app-button
+        icon="alternate_email"
+        label="VirtualR"
+        className="btn-sm bg-transparent hover:bg-none border-none"
+        (btnClick)="redirectTo('/')"
+      />
+    </div>
+    <div class="navBarMenu">
+      <app-button
+        icon="menu"
+        className="navBarMenuButton"
+        (btnClick)="handleSetMenu()"
+      />
+    </div>
+    <ul class="navBarList">
+      <app-routerlink
+        *ngFor="let link of links"
+        [label]="link.label"
+        [routerLink]="link.link"
+        [ngClass]="{
+          navBarLink: true,
+          'border-b border-[#EF6515]': currentRoute == link.link
+        }"
+      />
+      <div class="dropdown dropdown-hover">
+        <div
+          tabindex="0"
+          role="button"
+          class="m-1 text-xs lg:text-sm font-medium rounded-xl flex items-center justify-center gap-x-2"
+        >
+          <p>Options</p>
+          <mat-icon>more_vert</mat-icon>
+        </div>
+        <ul
+          tabindex="0"
+          class="dropdown-content menu bg-slate-900 dark:bg-neutral-700 rounded-box z-[1] w-40 p-2 shadow text-xs lg:text-sm"
+        >
+          <app-toogle-dark-mode className="text-sm" />
+
+          <app-routerlink
+            routerLink="/cats"
+            label="Cat API"
+            className="text-sm label"
+          />
+        </ul>
+      </div>
+    </ul>
+    <div class="navBarButtonsContainer">
+      <app-button
+        *ngFor="let button of buttons"
+        [label]="button.label"
+        [className]="button.class"
+        (btnClick)="redirectTo(button.link)"
+      />
+    </div>
+    <!-- Inicio del diseño Mobile -->
+    <div
+      class="overflow-hidden transition-all duration-200 ease-linear bg-slate-700/80 flex flex-col absolute top-[4.6rem] left-0 w-full"
+      [ngClass]="{
+        'max-h-0 ': !setMenu,
+        'max-h-[500px]': setMenu
+      }"
+    >
+      <ul class="navBarListMobile p-4">
+        <app-routerlink
+          *ngFor="let link of links"
+          [label]="link.label"
+          [routerLink]="link.link"
+          (aClick)="handleMobileLinks()"
+          [ngClass]="{
+            navBarLink: true,
+            'border-b border-[#EF6515]': currentRoute == link.link
+          }"
+        />
+        <div class="dropdown dropdown-hover dropdown-right">
+          <div
+            tabindex="0"
+            role="button"
+            class="m-1 text-xs lg:text-sm font-medium rounded-xl flex items-center justify-center gap-x-2"
+          >
+            <p>Options</p>
+          </div>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu bg-slate-900 dark:bg-neutral-700 rounded-box z-[1] w-40 p-2 shadow text-xs lg:text-sm"
+          >
+            <li class="text-xs"><app-toogle-dark-mode /></li>
+            <li class="text-xs">
+              <app-routerlink
+                label="Cat API"
+                routerLink="/cats"
+                className="text-xs"
+              />
+            </li>
+          </ul>
+        </div>
+      </ul>
+      <div class="navBarButtonsContainerMobile p-4">
+        <app-button
+          *ngFor="let button of buttons"
+          [label]="button.label"
+          [className]="button.class"
+          (btnClick)="handleMobileButtons(button.link)"
+        />
+      </div>
+    </div>
+  </div>
+</nav>
