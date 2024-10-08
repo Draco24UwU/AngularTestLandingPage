@@ -1,7 +1,11 @@
-<nav class="navBar relative">
-  <div class="navBarContainer">
+<nav
+  class="fixed top-0 z-50 backdrop-blur-md border-b w-full md:py-5 py-3 border-black/30 dark:border-white/30 transition-colors duration-500"
+>
+  <div
+    class="w-full flex items-center justify-around max-md:justify-between max-md:px-16 max-sm:px-8"
+  >
     <div
-      class="navBarLogo"
+      class="font-semibold max-md:text-center"
       [ngClass]="{
         'border-x  border-[#EF6515] rounded-lg': currentRoute === '/'
       }"
@@ -14,20 +18,20 @@
         (btnClick)="redirectTo('/')"
       />
     </div>
-    <div class="navBarMenu">
+    <div class="md:hidden block">
       <app-button
         icon="menu"
-        className="navBarMenuButton"
+        className="hover:scale-110"
         (btnClick)="handleSetMenu()"
       />
     </div>
-    <ul class="navBarList">
+    <ul class="flex items-center justify-center gap-x-8 max-md:hidden">
       <app-routerlink
         *ngFor="let link of links"
         [label]="link.label"
         [routerLink]="link.link"
         [ngClass]="{
-          navBarLink: true,
+          'active:scale-110 active:text-[#EF6515] md:hover:border-b ease-out duration-100 font-medium rounded-xl': true,
           'border-b border-[#EF6515]': currentRoute == link.link
         }"
       />
@@ -54,7 +58,7 @@
         </ul>
       </div>
     </ul>
-    <div class="navBarButtonsContainer">
+    <div class="flex items-center justify-around max-md:hidden">
       <app-button
         *ngFor="let button of buttons"
         [label]="button.label"
@@ -70,14 +74,16 @@
         'max-h-[500px]': setMenu
       }"
     >
-      <ul class="navBarListMobile p-4">
+      <ul
+        class="flex flex-col items-center justify-center gap-y-4 text-base p-4"
+      >
         <app-routerlink
           *ngFor="let link of links"
           [label]="link.label"
           [routerLink]="link.link"
           (aClick)="handleMobileLinks()"
           [ngClass]="{
-            navBarLink: true,
+            'active:scale-110 active:text-[#EF6515] md:hover:border-b ease-out duration-100': true,
             'border-b border-[#EF6515]': currentRoute == link.link
           }"
         />
@@ -104,7 +110,7 @@
           </ul>
         </div>
       </ul>
-      <div class="navBarButtonsContainerMobile p-4">
+      <div class="w-full flex items-center justify-center text-base p-4">
         <app-button
           *ngFor="let button of buttons"
           [label]="button.label"
